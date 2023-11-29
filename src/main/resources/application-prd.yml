@@ -1,0 +1,46 @@
+# 웹 서버(tomcat) 설정
+server:
+  servlet:
+    context-path: /
+  forward-headers-strategy: FRAMEWORK
+  tomcat:
+    accesslog:
+      enabled: false
+
+
+# 스프링 모듈 및 기능에 대한 설정
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/stim?serverTimezone=UTC&characterEncoding=UTF-8
+    username: sa96125
+    password: none
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  devtools:
+    livereload:
+      enabled: false
+
+
+# 스웨거 문서 제공 유무
+springfox:
+  documentation:
+    enabled: false
+
+
+# 환경 설정 변수
+jwt:
+  secret: 시크릿키설정필요
+  expiration: 1800000 # ms 30분 (30 * 60 * 1000)
+
+cookie:
+  expiration: 1800 # 30분

@@ -1,0 +1,55 @@
+# 스프링 모듈 및 기능에 대한 설정 (공통)
+spring:
+  web:
+    resources:
+      add-mappings: false
+      static-locations: classpath:/static/
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 5MB
+      file-size-threshold: 0
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+# 로그 기록 설정
+# logging:
+#   config: classpath:logback-spring.xml
+
+# 설정 파일(.yml) 정보 암호화 설정
+# jasypt:
+#   encryptor:
+#     password:
+#     bean: jasyptStringEncryptor
+
+---
+
+spring:
+  profiles:
+    active: prd
+
+---
+
+spring:
+  profiles:
+    active: stg
+
+---
+
+spring:
+  profiles:
+    active: test
+
+---
+
+spring:
+  profiles:
+    active: dev
+
+---
+

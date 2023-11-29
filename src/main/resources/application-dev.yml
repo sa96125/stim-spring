@@ -1,0 +1,41 @@
+# 웹 서버(tomcat) 설정
+server:
+  port: 8181
+  servlet:
+    context-path: /dev
+  forward-headers-strategy: FRAMEWORK
+  tomcat:
+    accesslog:
+      enabled: true
+
+
+# 스프링 모듈 및 기능에 대한 설정
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/stim?serverTimezone=UTC&characterEncoding=UTF-8
+    username: sa96125
+    password: stimdev
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  devtools:
+    livereload:
+      enabled: true
+
+
+# 환경 설정 변수
+jwt:
+  secret: 시크릿키설정필요
+  expiration: 180000 # ms 3분 (30 * 60 * 1000)
+
+cookie:
+  expiration: 180 # 3분
