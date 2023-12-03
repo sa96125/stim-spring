@@ -14,8 +14,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/stim?serverTimezone=UTC&characterEncoding=UTF-8
-    username: sa96125
-    password: stimdev
+    username: root
+    password: root
   jpa:
     show-sql: true
     properties:
@@ -27,6 +27,7 @@ spring:
     redis:
       host: localhost
       port: 6379
+      password: password
   devtools:
     livereload:
       enabled: true

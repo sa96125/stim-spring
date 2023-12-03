@@ -27,6 +27,11 @@ spring:
 #     password:
 #     bean: jasyptStringEncryptor
 
+twilio:
+  account-sid: YOUR_TWILIO_ACCOUNT_SID
+  auth-token: YOUR_TWILIO_AUTH_TOKEN
+  phone-number: YOUR_TWILIO_PHONE_NUMBER
+
 ---
 
 spring:
