@@ -35,3 +35,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Domain ###
+src/main/java/com/sa96125/stim/domain/chat/
+src/main/java/com/sa96125/stim/domain/comment/
+src/main/java/com/sa96125/stim/domain/feed/
+src/main/java/com/sa96125/stim/domain/file/
+src/main/java/com/sa96125/stim/domain/notification/
+src/main/java/com/sa96125/stim/domain/payment/
+src/main/java/com/sa96125/stim/domain/search/
