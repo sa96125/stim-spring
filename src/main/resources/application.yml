@@ -17,20 +17,19 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+
 # 로그 기록 설정
-# logging:
-#   config: classpath:logback-spring.xml
+logging:
+  #  config: classpath:logback-spring.xml
+  level:
+    org.springframework.core.LocalVariableTableParameterNameDiscoverer: ERROR
+
 
 # 설정 파일(.yml) 정보 암호화 설정
-# jasypt:
-#   encryptor:
-#     password:
-#     bean: jasyptStringEncryptor
-
-twilio:
-  account-sid: YOUR_TWILIO_ACCOUNT_SID
-  auth-token: YOUR_TWILIO_AUTH_TOKEN
-  phone-number: YOUR_TWILIO_PHONE_NUMBER
+jasypt:
+  encryptor:
+    password:
+    bean: jasyptStringEncryptor
 
 ---
 
