@@ -31,8 +31,10 @@ public class UserController {
         return ResponseEntity.ok().body(ResponseUser.from(user));
     }
     
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseUser> remove(@PathVariable String id) {
+    @DeleteMapping()
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<ResponseUser> remove() {
+        String id = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.delete(id);
         return ResponseEntity.ok().body(ResponseUser.from(user));
     }
