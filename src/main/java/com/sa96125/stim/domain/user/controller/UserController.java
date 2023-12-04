@@ -5,6 +5,8 @@ import com.sa96125.stim.domain.user.service.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "회원 (users)")
@@ -14,29 +16,30 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     
     private final UserService userService;
-
+    
     @PostMapping()
     public ResponseEntity<ResponseUser> register(@RequestBody RequestCreate request) {
-        User user = userService.createUserBy(request);
+        User user = userService.create(request.toUser());
         return ResponseEntity.ok().body(ResponseUser.from(user));
     }
     
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseUser> edit(@PathVariable String id, @RequestBody RequestUpdate request) {
-        User user = userService.updateUserBy(id, request);
+    @PutMapping()
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<ResponseUser> edit(@RequestBody RequestUpdate request) {
+        String id = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.update(request.toUser(id));
         return ResponseEntity.ok().body(ResponseUser.from(user));
     }
     
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseUser> remove(@PathVariable String id) {
-        User user = userService.deleteUserBy(id);
+        User user = userService.delete(id);
         return ResponseEntity.ok().body(ResponseUser.from(user));
     }
     
     @GetMapping("/{id}")
     public ResponseEntity<ResponseUser> detail(@PathVariable String id) {
-        User user = userService.getUserBy(id);
+        User user = userService.getById(id);
         return ResponseEntity.ok().body(ResponseUser.from(user));
     }
-    
 }

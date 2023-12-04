@@ -1,19 +1,23 @@
 package com.sa96125.stim.domain.user.service;
 
+import com.sa96125.stim.common.api.type.Role;
 import com.sa96125.stim.domain.user.repository.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Builder
 public class User {
+    
     private final String userId;
     private final String email;
     private final String password;
     private final String nick;
     private final String name;
     private final String mobile;
-    private final String role;
+    private final Role role;
     private final String status;
     private final String verificationCode;
     private final long lastLoginAt;

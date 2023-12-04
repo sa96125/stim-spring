@@ -1,9 +1,7 @@
 package com.sa96125.stim.domain.user.repository;
 
+import com.sa96125.stim.common.api.type.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +33,7 @@ public class UserEntity {
     private String mobile;
     
     @Column
-    private String role;
+    private Role role;
     
     @Column
     private String status;
