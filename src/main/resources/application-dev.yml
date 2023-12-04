@@ -18,6 +18,7 @@ spring:
     password: root
   jpa:
     show-sql: true
+    open-in-view: false
     properties:
       hibernate:
         format_sql: true
@@ -38,5 +39,12 @@ jwt:
   secret: 시크릿키설정필요
   expiration: 180000 # ms 3분 (30 * 60 * 1000)
 
+
 cookie:
   expiration: 180 # 3분
+
+
+twilio:
+  account-sid: YOUR_TWILIO_ACCOUNT_SID
+  auth-token: YOUR_TWILIO_AUTH_TOKEN
+  phone-number: YOUR_TWILIO_PHONE_NUMBER
