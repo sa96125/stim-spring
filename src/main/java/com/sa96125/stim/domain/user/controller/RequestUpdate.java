@@ -16,7 +16,7 @@ public class RequestUpdate {
     private final String name;
     private final String mobile;
     private final Role role;
-    private final String status;
+    private final Status status;
     
     public RequestUpdate(
             @JsonProperty("password") String password,
@@ -24,7 +24,7 @@ public class RequestUpdate {
             @JsonProperty("name") String name,
             @JsonProperty("mobile") String mobile,
             @JsonProperty("role") Role role,
-            @JsonProperty("status") String status) {
+            @JsonProperty("status") Status status) {
         this.password = password;
         this.nick = nick;
         this.name = name;
@@ -41,7 +41,7 @@ public class RequestUpdate {
                 .name(this.name)
                 .mobile(this.mobile)
                 .role(this.role)
-                .status(Status.PENDING.getValue())
+                .status(Status.PENDING)
                 .build();
     }
 }

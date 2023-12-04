@@ -1,6 +1,7 @@
 package com.sa96125.stim.domain.user.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sa96125.stim.common.api.type.Status;
 import com.sa96125.stim.domain.user.service.User;
 import lombok.Builder;
 
@@ -12,7 +13,7 @@ public class ResponseUser {
     private final String nick;
     private final String name;
     private final String mobile;
-    private final String status;
+    private final Status status;
     
     public static ResponseUser from(User user) {
         return builder()

@@ -1,6 +1,7 @@
 package com.sa96125.stim.domain.user.repository;
 
 import com.sa96125.stim.common.api.type.Role;
+import com.sa96125.stim.common.api.type.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,11 +33,11 @@ public class UserEntity {
     @Column
     private String mobile;
     
-    @Column
+    @Enumerated(EnumType.STRING)
     private Role role;
     
-    @Column
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     
     @Column
     private long lastLoginAt;

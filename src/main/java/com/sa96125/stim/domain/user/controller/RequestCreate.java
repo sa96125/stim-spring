@@ -27,7 +27,7 @@ public class RequestCreate {
                 .userId(UUID.randomUUID().toString())
                 .email(this.getEmail())
                 .password(this.getPassword())
-                .status(Status.PENDING.getValue())
+                .status(Status.PENDING)
                 .build();
     }
 }

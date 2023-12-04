@@ -1,6 +1,7 @@
 package com.sa96125.stim.domain.user.service;
 
 import com.sa96125.stim.common.api.type.Role;
+import com.sa96125.stim.common.api.type.Status;
 import com.sa96125.stim.domain.user.repository.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class User {
     private final String name;
     private final String mobile;
     private final Role role;
-    private final String status;
+    private final Status status;
     private final String verificationCode;
     private final long lastLoginAt;
     
