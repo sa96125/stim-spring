@@ -16,14 +16,13 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class RedisClient implements SessionAdapter {
     
+    private static final String VERIFICATION_CODE_KEY_PREFIX = "verificationCode-";
     private final StringRedisTemplate stringRedisTemplate;
     
-    private static final String VERIFICATION_CODE_KEY_PREFIX = "verificationCode-";
-    
     @Override
-    public String saveFor3Minutes(String verificationCode) {
+    public String saveVerificationCodeFor3Minutes(String verificationCode) {
         String accessKey = UUID.randomUUID().toString();
-        stringRedisTemplate.opsForValue().set( VERIFICATION_CODE_KEY_PREFIX + accessKey , verificationCode, 3, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(VERIFICATION_CODE_KEY_PREFIX + accessKey, verificationCode, 3, TimeUnit.MINUTES);
         return accessKey;
     }
     
