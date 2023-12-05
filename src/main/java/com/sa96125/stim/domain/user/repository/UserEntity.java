@@ -2,9 +2,12 @@ package com.sa96125.stim.domain.user.repository;
 
 import com.sa96125.stim.common.api.type.Role;
 import com.sa96125.stim.common.api.type.Status;
+import com.sa96125.stim.domain.feed.repository.FeedEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,7 +18,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false)
+    @Column(name = "user_id", nullable = false)
     private String userId;
     
     @Column
@@ -38,6 +41,9 @@ public class UserEntity {
     
     @Enumerated(EnumType.STRING)
     private Status status;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FeedEntity> feeds;
     
     @Column
     private long lastLoginAt;

@@ -1,5 +1,6 @@
 package com.sa96125.stim.domain.user.repository;
 
+import com.sa96125.stim.domain.feed.service.port.FeedUserAdapter;
 import com.sa96125.stim.domain.user.service.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -8,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl implements UserRepository, FeedUserAdapter {
     
     private final UserJpaRepository userJpaRepository;
     

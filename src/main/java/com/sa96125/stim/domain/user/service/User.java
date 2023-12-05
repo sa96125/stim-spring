@@ -2,10 +2,13 @@ package com.sa96125.stim.domain.user.service;
 
 import com.sa96125.stim.common.api.type.Role;
 import com.sa96125.stim.common.api.type.Status;
+import com.sa96125.stim.domain.feed.service.Feed;
 import com.sa96125.stim.domain.user.repository.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +24,7 @@ public class User {
     private final Role role;
     private final Status status;
     private final String verificationCode;
+    private final List<Feed> feeds;
     private final long lastLoginAt;
     
     public static User from(UserEntity e) {
@@ -32,6 +36,7 @@ public class User {
                 .mobile(e.getMobile())
                 .role(e.getRole())
                 .status(e.getStatus())
+                .feeds(e.getFeeds().stream().map(Feed::from).toList())
                 .lastLoginAt(e.getLastLoginAt())
                 .build();
     }
@@ -45,6 +50,7 @@ public class User {
         e.setMobile(this.mobile);
         e.setRole(this.role);
         e.setStatus(this.status);
+        e.setFeeds(this.feeds.stream().map(Feed::toEntity).toList());
         e.setLastLoginAt(this.lastLoginAt);
         return e;
     }
