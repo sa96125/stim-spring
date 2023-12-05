@@ -6,8 +6,9 @@ import com.sa96125.stim.common.api.exception.custom.ResourceNotFoundException;
 import com.sa96125.stim.domain.feed.controller.port.FeedService;
 import com.sa96125.stim.domain.feed.repository.FeedEntity;
 import com.sa96125.stim.domain.feed.service.port.FeedRepository;
+import com.sa96125.stim.domain.feed.service.port.FeedUserAdapter;
 import com.sa96125.stim.domain.feed.service.port.SecurityContextAdapter;
-import jakarta.persistence.NoResultException;
+import com.sa96125.stim.domain.user.repository.UserEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class FeedServiceImpl implements FeedService {
     
     private final FeedRepository feedRepository;
+    private final FeedUserAdapter feedUserAdapter;
     private final SecurityContextAdapter securityContextAdapter;
     
     @Override
@@ -28,15 +30,16 @@ public class FeedServiceImpl implements FeedService {
     public Feed create(Feed feed) {
         try {
             String userId = securityContextAdapter.authenticateUser();
-            feed.setUserId(userId);
+            UserEntity userEntity = feedUserAdapter.findById(userId).orElseThrow();
             FeedEntity feedEntity = feed.toEntity();
+            feedEntity.setUser(userEntity);
             return Feed.from(feedRepository.save(feedEntity));
         } catch (DataIntegrityViolationException e) {
             log.error("Duplicate feed: " + e.getMessage());
             throw new DuplicateAccountException("Duplicate feed with feedId: " + feed.getFeedId());
         } catch (AuthenticationFailedException e) {
             log.error("User does not have permission: " + e.getMessage());
-            throw new DuplicateAccountException("User authentication failed in Security Context: " + feed.getFeedId());
+            throw new AuthenticationFailedException("User authentication failed in Security Context: " + feed.getFeedId());
         } catch (Exception e) {
             log.error("Failed to create user: " + e.getMessage());
             throw new ResourceNotFoundException("Failed to create feed with feedId: " + feed.getFeedId());
@@ -71,9 +74,7 @@ public class FeedServiceImpl implements FeedService {
     @Transactional(readOnly = true)
     public Feed getById(String feedId) {
         try {
-            FeedEntity feedEntity = feedRepository.findById(feedId)
-                    .orElseThrow(() -> new NoResultException("No feed found with feedId: " + feedId));
-            
+            FeedEntity feedEntity = feedRepository.findById(feedId).orElseThrow();
             return Feed.from(feedEntity);
         } catch (Exception e) {
             log.error("Failed to fetch feed: " + e.getMessage());

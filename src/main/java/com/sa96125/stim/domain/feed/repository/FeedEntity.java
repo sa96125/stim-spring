@@ -1,9 +1,13 @@
 package com.sa96125.stim.domain.feed.repository;
 
 import com.sa96125.stim.common.api.type.Status;
+import com.sa96125.stim.domain.comment.repository.CommentEntity;
+import com.sa96125.stim.domain.user.repository.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,11 +18,8 @@ public class FeedEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false)
+    @Column(name = "feed_id", nullable = false)
     private String feedId;
-    
-    @Column(nullable = false)
-    private String userId;
     
     @Column
     private String title;
@@ -28,4 +29,11 @@ public class FeedEntity {
     
     @Column
     private Status status;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
+    
+    @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommentEntity> comments;
 }

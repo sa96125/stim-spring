@@ -3,9 +3,9 @@ package com.sa96125.stim.domain.feed.controller.port;
 import com.sa96125.stim.domain.feed.service.Feed;
 
 public interface FeedService {
-    Feed create(Feed request);
+    Feed create(Feed feed);
     
-    Feed update(Feed request);
+    Feed update(Feed feed);
     
     Feed delete(String feedId);
     

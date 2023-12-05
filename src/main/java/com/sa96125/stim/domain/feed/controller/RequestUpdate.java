@@ -31,7 +31,7 @@ public class RequestUpdate {
                 .feedId(feedId)
                 .title(this.getTitle())
                 .content(this.getContent())
-                .status(Status.ACTIVE)
+                .status(this.status)
                 .build();
     }
 }

@@ -12,17 +12,14 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RequestCreate {
     
-    private final String userId;
     private final String title;
     private final String content;
     private final Status status;
     
     public RequestCreate(
-            @JsonProperty("userId") String userId,
             @JsonProperty("title") String title,
             @JsonProperty("content") String content,
             @JsonProperty("status") Status status) {
-        this.userId = userId;
         this.title = title;
         this.content = content;
         this.status = status;
@@ -31,7 +28,6 @@ public class RequestCreate {
     public Feed toFeed() {
         return Feed.builder()
                 .feedId(UUID.randomUUID().toString())
-                .userId(this.getUserId())
                 .title(this.getTitle())
                 .content(this.getContent())
                 .status(Status.ACTIVE)
