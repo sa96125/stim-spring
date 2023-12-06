@@ -2,7 +2,7 @@ package com.sa96125.stim.common.kafka;
 
 import com.sa96125.stim.common.security.SecurityContextProvider;
 import com.sa96125.stim.domain.notification.service.Notification;
-import com.sa96125.stim.domain.notification.service.port.MessageQueueAdapter;
+import com.sa96125.stim.common.kafka.port.MessageQueueAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;

@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.feed.service.port;
+package com.sa96125.stim.common.security.port;
 
 public interface SecurityContextAdapter {
     String authenticateUser();

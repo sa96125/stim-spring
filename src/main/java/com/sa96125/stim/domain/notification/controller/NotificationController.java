@@ -1,6 +1,6 @@
 package com.sa96125.stim.domain.notification.controller;
 
-import com.sa96125.stim.domain.notification.controller.port.NotificationService;
+import com.sa96125.stim.domain.notification.service.port.NotificationService;
 import com.sa96125.stim.domain.notification.service.Notification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;

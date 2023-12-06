@@ -2,7 +2,7 @@ package com.sa96125.stim.common.security;
 
 import com.sa96125.stim.common.api.exception.custom.AuthenticationFailedException;
 import com.sa96125.stim.common.jwt.JwtProvider;
-import com.sa96125.stim.common.security.port.UserDetailsServiceAdapter;
+import com.sa96125.stim.domain.user.service.port.UserDetailsServiceAdapter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

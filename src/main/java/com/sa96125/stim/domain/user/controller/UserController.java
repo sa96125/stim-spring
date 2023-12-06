@@ -1,6 +1,6 @@
 package com.sa96125.stim.domain.user.controller;
 
-import com.sa96125.stim.domain.user.controller.port.UserService;
+import com.sa96125.stim.domain.user.service.port.UserService;
 import com.sa96125.stim.domain.user.service.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

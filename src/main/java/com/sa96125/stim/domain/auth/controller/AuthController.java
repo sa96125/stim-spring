@@ -2,8 +2,8 @@ package com.sa96125.stim.domain.auth.controller;
 
 import com.sa96125.stim.common.api.util.HttpUtils;
 import com.sa96125.stim.common.api.vo.ResponseMessage;
-import com.sa96125.stim.domain.auth.controller.port.SessionAdapter;
-import com.sa96125.stim.domain.auth.controller.port.SmsAdapter;
+import com.sa96125.stim.common.redis.port.SessionAdapter;
+import com.sa96125.stim.common.twilio.port.SmsAdapter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;

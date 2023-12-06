@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.feed.service.port;
+package com.sa96125.stim.domain.feed.repository.port;
 
 import com.sa96125.stim.domain.feed.repository.FeedEntity;
 

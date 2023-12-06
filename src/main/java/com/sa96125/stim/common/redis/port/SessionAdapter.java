@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.auth.controller.port;
+package com.sa96125.stim.common.redis.port;
 
 public interface SessionAdapter {
     String saveVerificationCodeFor3Minutes(String verificationCode);

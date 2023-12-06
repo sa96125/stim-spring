@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.notification.service.port;
+package com.sa96125.stim.domain.notification.repository.port;
 
 import com.sa96125.stim.domain.notification.repository.NotificationEntity;
 

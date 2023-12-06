@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.user.controller.port;
+package com.sa96125.stim.domain.user.service.port;
 
 import com.sa96125.stim.domain.user.service.User;
 

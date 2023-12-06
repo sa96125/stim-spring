@@ -3,12 +3,12 @@ package com.sa96125.stim.domain.feed.service;
 import com.sa96125.stim.common.api.exception.custom.AuthenticationFailedException;
 import com.sa96125.stim.common.api.exception.custom.DuplicateAccountException;
 import com.sa96125.stim.common.api.exception.custom.ResourceNotFoundException;
-import com.sa96125.stim.domain.feed.controller.port.FeedService;
+import com.sa96125.stim.domain.feed.service.port.FeedService;
 import com.sa96125.stim.domain.feed.repository.FeedEntity;
-import com.sa96125.stim.domain.feed.service.port.FeedRepository;
-import com.sa96125.stim.domain.feed.service.port.FeedUserAdapter;
-import com.sa96125.stim.domain.feed.service.port.SecurityContextAdapter;
+import com.sa96125.stim.domain.feed.repository.port.FeedRepository;
+import com.sa96125.stim.common.security.port.SecurityContextAdapter;
 import com.sa96125.stim.domain.user.repository.UserEntity;
+import com.sa96125.stim.domain.user.repository.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class FeedServiceImpl implements FeedService {
     
     private final FeedRepository feedRepository;
-    private final FeedUserAdapter feedUserAdapter;
+    private final UserRepository userRepository;
     private final SecurityContextAdapter securityContextAdapter;
     
     @Override
@@ -30,7 +30,7 @@ public class FeedServiceImpl implements FeedService {
     public Feed create(Feed feed) {
         try {
             String userId = securityContextAdapter.authenticateUser();
-            UserEntity userEntity = feedUserAdapter.findById(userId).orElseThrow();
+            UserEntity userEntity = userRepository.findById(userId).orElseThrow();
             FeedEntity feedEntity = feed.toEntity();
             feedEntity.setUser(userEntity);
             return Feed.from(feedRepository.save(feedEntity));

@@ -1,6 +1,6 @@
 package com.sa96125.stim.domain.comment.controller;
 
-import com.sa96125.stim.domain.comment.controller.port.CommentService;
+import com.sa96125.stim.domain.comment.service.port.CommentService;
 import com.sa96125.stim.domain.comment.service.Comment;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

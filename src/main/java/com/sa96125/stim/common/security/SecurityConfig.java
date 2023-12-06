@@ -1,6 +1,6 @@
 package com.sa96125.stim.common.security;
 
-import com.sa96125.stim.common.security.port.UserDetailsServiceAdapter;
+import com.sa96125.stim.domain.user.service.port.UserDetailsServiceAdapter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

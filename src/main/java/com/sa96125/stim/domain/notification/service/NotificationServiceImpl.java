@@ -2,9 +2,9 @@ package com.sa96125.stim.domain.notification.service;
 
 import com.sa96125.stim.common.api.type.Notify;
 import com.sa96125.stim.domain.comment.service.Comment;
-import com.sa96125.stim.domain.notification.controller.port.NotificationService;
-import com.sa96125.stim.domain.notification.service.port.MessageQueueAdapter;
-import com.sa96125.stim.domain.notification.service.port.NotificationRepository;
+import com.sa96125.stim.domain.notification.service.port.NotificationService;
+import com.sa96125.stim.common.kafka.port.MessageQueueAdapter;
+import com.sa96125.stim.domain.notification.repository.port.NotificationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

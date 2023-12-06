@@ -1,6 +1,6 @@
 package com.sa96125.stim.domain.comment.repository;
 
-import com.sa96125.stim.domain.comment.service.port.CommentRepository;
+import com.sa96125.stim.domain.comment.repository.port.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

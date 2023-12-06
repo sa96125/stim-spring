@@ -1,11 +1,11 @@
 package com.sa96125.stim.domain.comment.service;
 
 import com.sa96125.stim.common.api.exception.custom.ResourceNotFoundException;
-import com.sa96125.stim.domain.comment.controller.port.CommentService;
+import com.sa96125.stim.domain.comment.service.port.CommentService;
 import com.sa96125.stim.domain.comment.repository.CommentEntity;
-import com.sa96125.stim.domain.comment.service.port.CommentFeedAdapter;
-import com.sa96125.stim.domain.comment.service.port.CommentRepository;
+import com.sa96125.stim.domain.comment.repository.port.CommentRepository;
 import com.sa96125.stim.domain.feed.repository.FeedEntity;
+import com.sa96125.stim.domain.feed.repository.port.FeedRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentServiceImpl implements CommentService {
     
     private final CommentRepository commentRepository;
-    private final CommentFeedAdapter commentFeedAdapter;
+    private final FeedRepository feedRepository;
     
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ)
@@ -28,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
             
             if (comment.getFeedId() != null) {
                 String feedId = comment.getFeedId();
-                FeedEntity feedEntity = commentFeedAdapter.findById(feedId).orElseThrow();
+                FeedEntity feedEntity = feedRepository.findById(feedId).orElseThrow();
                 commentEntity.setFeed(feedEntity);
             } else if (comment.getPrentCommentId() != null) {
                 String parentCommentId = comment.getPrentCommentId();

@@ -1,7 +1,7 @@
 package com.sa96125.stim.common.redis;
 
 import com.sa96125.stim.common.api.exception.custom.ResourceNotFoundException;
-import com.sa96125.stim.domain.auth.controller.port.SessionAdapter;
+import com.sa96125.stim.common.redis.port.SessionAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;

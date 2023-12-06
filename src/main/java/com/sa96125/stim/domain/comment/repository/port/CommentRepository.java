@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.comment.service.port;
+package com.sa96125.stim.domain.comment.repository.port;
 
 import com.sa96125.stim.domain.comment.repository.CommentEntity;
 

@@ -1,7 +1,7 @@
 package com.sa96125.stim.common.security;
 
 import com.sa96125.stim.common.api.exception.custom.AuthenticationFailedException;
-import com.sa96125.stim.domain.feed.service.port.SecurityContextAdapter;
+import com.sa96125.stim.common.security.port.SecurityContextAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.comment.controller.port;
+package com.sa96125.stim.domain.comment.service.port;
 
 import com.sa96125.stim.domain.comment.service.Comment;
 

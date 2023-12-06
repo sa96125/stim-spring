@@ -2,10 +2,10 @@ package com.sa96125.stim.domain.user.service;
 
 import com.sa96125.stim.common.api.exception.custom.DuplicateAccountException;
 import com.sa96125.stim.common.api.exception.custom.ResourceNotFoundException;
-import com.sa96125.stim.common.security.port.UserDetailsServiceAdapter;
-import com.sa96125.stim.domain.user.controller.port.UserService;
+import com.sa96125.stim.domain.user.service.port.UserDetailsServiceAdapter;
+import com.sa96125.stim.domain.user.service.port.UserService;
 import com.sa96125.stim.domain.user.repository.UserEntity;
-import com.sa96125.stim.domain.user.service.port.UserRepository;
+import com.sa96125.stim.domain.user.repository.port.UserRepository;
 import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,6 @@
 package com.sa96125.stim.domain.feed.repository;
 
-import com.sa96125.stim.domain.comment.service.port.CommentFeedAdapter;
-import com.sa96125.stim.domain.feed.service.port.FeedRepository;
+import com.sa96125.stim.domain.feed.repository.port.FeedRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class FeedRepositoryImpl implements FeedRepository, CommentFeedAdapter {
+public class FeedRepositoryImpl implements FeedRepository {
     
     private final FeedJpaRepository feedJpaRepository;
     

@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.user.service.port;
+package com.sa96125.stim.domain.user.repository.port;
 
 import com.sa96125.stim.domain.user.repository.UserEntity;
 

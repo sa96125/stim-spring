@@ -1,6 +1,6 @@
 package com.sa96125.stim.common.twilio;
 
-import com.sa96125.stim.domain.auth.controller.port.SmsAdapter;
+import com.sa96125.stim.common.twilio.port.SmsAdapter;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import lombok.extern.slf4j.Slf4j;

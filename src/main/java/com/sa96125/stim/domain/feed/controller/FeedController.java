@@ -1,6 +1,6 @@
 package com.sa96125.stim.domain.feed.controller;
 
-import com.sa96125.stim.domain.feed.controller.port.FeedService;
+import com.sa96125.stim.domain.feed.service.port.FeedService;
 import com.sa96125.stim.domain.feed.service.Feed;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
