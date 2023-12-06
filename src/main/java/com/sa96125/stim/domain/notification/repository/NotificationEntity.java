@@ -1,7 +1,7 @@
 package com.sa96125.stim.domain.notification.repository;
 
-import com.sa96125.stim.common.api.type.Job;
-import com.sa96125.stim.common.api.type.Status;
+import com.sa96125.stim.common.api.type.Notify;
+import com.sa96125.stim.domain.user.repository.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,19 +14,20 @@ public class NotificationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column(name = "notification_id", nullable = false)
     private String notificationId;
-
-    @Column()
-    private String userId;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity targetUser;
+    
     @Column()
     private String message;
-
+    
     @Column()
-    private Status read;
-
+    private String isRead;
+    
     @Column()
-    private Job job;
+    private Notify job;
 }

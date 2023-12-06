@@ -16,6 +16,10 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-group
 
 
 # 로그 기록 설정

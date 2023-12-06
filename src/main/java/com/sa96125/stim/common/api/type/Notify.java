@@ -3,16 +3,17 @@ package com.sa96125.stim.common.api.type;
 import lombok.Getter;
 
 @Getter
-public enum Job {
-
-    NEW_NOTICE("NEW_NOTICE"),
+public enum Notify {
+    
+    NEW_GENERAL("NEW_GENERAL"),
     NEW_FEED("NEW_FEED"),
     NEW_COMMENT("NEW_COMMENT"),
+    NEW_FOLLOW("NEW_FOLLOW"),
     NEW_FOLLOWER("NEW_FOLLOWER");
-
+    
     private final String value;
-
-    Job(String value) {
+    
+    Notify(String value) {
         this.value = value;
     }
 }
