@@ -15,13 +15,20 @@ repositories {
     mavenCentral()
 }
 
+springBoot {
+    mainClass = 'com.sa96125.stim.StimApplication'
+}
+
 ext {
-    profile = (!project.hasProperty('profile') || !profile) ? 'dev' : profile
+    profile = findProperty('profile') ?: 'dev'
+    lombokVersion = '1.18.28'
+    restdocsApiSpecVersion = '0.16.2'
+    springfoxVersion = '3.0.0'
 }
 
 dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     /* spring-framework */
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -43,8 +50,9 @@ dependencies {
     implementation 'org.redisson:redisson:3.22.0'
 
     /* docs */
-    implementation "io.springfox:springfox-boot-starter:3.0.0"
-    implementation "io.springfox:springfox-swagger-ui:3.0.0"
+    implementation "io.springfox:springfox-swagger-ui:${springfoxVersion}"
+    implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
+
 
     /* encrypt */
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
@@ -54,7 +62,7 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
 
     /* etc */
-    implementation 'org.projectlombok:lombok:1.18.28'
+    implementation "org.projectlombok:lombok:${lombokVersion}"
     implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1'
     implementation 'com.twilio.sdk:twilio:7.38.1'
@@ -63,10 +71,21 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('bootBuildImage') {
-    builder = 'paketobuildpacks/builder-jammy-base:latest'
-}
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+/*  TODO: RestDocs + Swagger UI
+
+    tasks.register('generateDocs') {
+        dependsOn 'asciidoctor', 'bootJar'
+        doLast {
+            javaexec {
+                main = 'org.springframework.boot.loader.JarLauncher'
+                classpath = project.tasks.bootJar.outputs.files + configurations.runtime
+            }
+        }
+    }
+
+*/
