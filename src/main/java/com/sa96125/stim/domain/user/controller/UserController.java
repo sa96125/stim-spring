@@ -1,8 +1,10 @@
 package com.sa96125.stim.domain.user.controller;
 
-import com.sa96125.stim.domain.user.service.port.UserService;
 import com.sa96125.stim.domain.user.service.User;
+import com.sa96125.stim.domain.user.service.port.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +18,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     
     private final UserService userService;
+    
+    @PermitAll
+    @GetMapping("/status")
+    @Operation(summary = "상태 확인")
+    public String status() {
+        return "user-service is now on";
+    }
     
     @PostMapping()
     public ResponseEntity<ResponseUser> register(@RequestBody RequestCreate request) {
