@@ -1,6 +1,6 @@
 package com.sa96125.stim.common.flux;
 
-import com.sa96125.stim.domain.notification.controller.NotificationController;
+import com.sa96125.stim.domain.notification.connect.NotificationHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.HandlerMapping;
@@ -14,9 +14,9 @@ import java.util.Map;
 public class WebSocketConfig {
     
     @Bean
-    public HandlerMapping webSocketMapping(NotificationController notificationController) {
+    public HandlerMapping webSocketMapping(NotificationHandler notificationHandler) {
         Map<String, WebSocketHandler> map = new HashMap<>();
-        map.put("/notifications", notificationController);
+        map.put("/notifications", notificationHandler);
         
         SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
         mapping.setUrlMap(map);

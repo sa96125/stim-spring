@@ -19,7 +19,7 @@ public class Comment {
     private String feedId;
     private Feed feed;
     private Status status;
-    private String prentCommentId;
+    private String parentCommentId;
     private Comment parentComment;
     private List<Comment> childComments;
     
@@ -31,7 +31,7 @@ public class Comment {
                 .feedId(e.getFeed().getFeedId())
                 .feed(Feed.from(e.getFeed()))
                 .status(e.getStatus())
-                .prentCommentId(e.getParentComment().getCommentId())
+                .parentCommentId(e.getParentComment().getCommentId())
                 .parentComment(e.getParentComment() != null ? Comment.from(e.getParentComment()) : null)
                 .childComments(e.getChildComments() != null ? e.getChildComments().stream().map(Comment::from).toList() : null)
                 .build();

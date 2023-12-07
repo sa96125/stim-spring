@@ -1,4 +1,4 @@
-package com.sa96125.stim.domain.notification.controller;
+package com.sa96125.stim.domain.notification.connect;
 
 import com.sa96125.stim.domain.notification.service.port.NotificationService;
 import com.sa96125.stim.domain.notification.service.Notification;
@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 @Controller
 @RequiredArgsConstructor
-public class NotificationController implements WebSocketHandler {
+public class NotificationHandler implements WebSocketHandler {
     
     private final NotificationService notificationService;
     

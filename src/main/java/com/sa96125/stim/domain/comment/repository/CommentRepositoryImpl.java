@@ -3,6 +3,7 @@ package com.sa96125.stim.domain.comment.repository;
 import com.sa96125.stim.domain.comment.repository.port.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -10,25 +11,25 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CommentRepositoryImpl implements CommentRepository {
     
-    private final CommentJpaRepository commentJpaRepository;
-    
+    private final ReactiveCommentRepository reactiveCommentRepository;
+
     @Override
-    public CommentEntity save(CommentEntity commentEntity) {
-        return commentJpaRepository.save(commentEntity);
+    public Mono<CommentEntity> save(CommentEntity commentEntity) {
+        return reactiveCommentRepository.save(commentEntity);
     }
-    
+
     @Override
-    public CommentEntity update(CommentEntity commentEntity) {
-        return commentJpaRepository.save(commentEntity);
+    public Mono<CommentEntity> update(CommentEntity commentEntity) {
+        return reactiveCommentRepository.save(commentEntity);
     }
-    
+
     @Override
-    public void delete(String commentId) {
-        commentJpaRepository.deleteByCommentId(commentId);
+    public Mono<Void> delete(String commentId) {
+        return reactiveCommentRepository.deleteByCommentId(commentId);
     }
-    
+
     @Override
-    public Optional<CommentEntity> findById(String commentId) {
-        return commentJpaRepository.findByCommentId(commentId);
+    public Mono<CommentEntity> findById(String commentId) {
+        return reactiveCommentRepository.findByCommentId(commentId);
     }
 }
