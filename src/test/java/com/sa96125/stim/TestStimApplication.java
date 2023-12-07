@@ -5,9 +5,9 @@ import org.springframework.boot.test.context.TestConfiguration;
 
 @TestConfiguration(proxyBeanMethods = false)
 public class TestStimApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.from(Stim::main).with(TestStimApplication.class).run(args);
-	}
-
+    
+    public static void main(String[] args) {
+        SpringApplication.from(StimApplication::main).with(TestStimApplication.class).run(args);
+    }
+    
 }

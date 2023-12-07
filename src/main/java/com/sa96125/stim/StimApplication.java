@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Stim {
-
-	public static void main(String[] args) {
-		SpringApplication.run(Stim.class, args);
-	}
-
+public class StimApplication {
+    
+    public static void main(String[] args) {
+        SpringApplication.run(StimApplication.class, args);
+    }
+    
 }
