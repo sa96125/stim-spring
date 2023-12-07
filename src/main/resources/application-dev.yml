@@ -2,12 +2,16 @@
 server:
   port: 8181
   servlet:
-    context-path: /dev
+    context-path: /
   forward-headers-strategy: FRAMEWORK
   tomcat:
     accesslog:
       enabled: true
 
+# 로그 설정
+logging:
+  level:
+    org.springframework.security: DEBUG
 
 # 스프링 모듈 및 기능에 대한 설정
 spring:

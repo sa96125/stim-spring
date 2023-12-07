@@ -23,7 +23,6 @@ ext {
     profile = findProperty('profile') ?: 'dev'
     lombokVersion = '1.18.28'
     restdocsApiSpecVersion = '0.16.2'
-    springfoxVersion = '3.0.0'
 }
 
 dependencies {
@@ -50,9 +49,7 @@ dependencies {
     implementation 'org.redisson:redisson:3.22.0'
 
     /* docs */
-    implementation "io.springfox:springfox-swagger-ui:${springfoxVersion}"
-    implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
-
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
     /* encrypt */
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
@@ -62,9 +59,13 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
 
     /* etc */
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation "org.projectlombok:lombok:${lombokVersion}"
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.12.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.5'
+
+
     implementation 'com.twilio.sdk:twilio:7.38.1'
 
     /* test */

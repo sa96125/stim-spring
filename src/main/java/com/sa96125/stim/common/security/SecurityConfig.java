@@ -38,9 +38,15 @@ public class SecurityConfig {
                 .addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(getAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(new MvcRequestMatcher(introspector, "/auth/**")).permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers(
+                                new MvcRequestMatcher(introspector, "/users/status"),
+                                new MvcRequestMatcher(introspector, "/v3/api-docs"),
+                                new MvcRequestMatcher(introspector, "/v3/api-docs/**"),
+                                new MvcRequestMatcher(introspector, "/swagger-resources/**"),
+                                new MvcRequestMatcher(introspector, "/swagger-ui.html"),
+                                new MvcRequestMatcher(introspector, "/swagger-ui/**")
+                        ).permitAll()
+                        .anyRequest().authenticated())
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"))
                         .accessDeniedHandler((request, response, accessDeniedException) -> response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied"))
