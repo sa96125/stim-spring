@@ -4,12 +4,13 @@ import com.sa96125.stim.common.api.exception.custom.ResourceNotFoundException;
 import com.sa96125.stim.domain.comment.repository.CommentEntity;
 import com.sa96125.stim.domain.comment.repository.port.CommentRepository;
 import com.sa96125.stim.domain.comment.service.port.CommentService;
+import com.sa96125.stim.domain.feed.repository.FeedEntity;
 import com.sa96125.stim.domain.feed.repository.port.FeedRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -20,55 +21,61 @@ public class CommentServiceImpl implements CommentService {
     private final FeedRepository feedRepository;
 
     @Override
-    public Mono<Comment> create(Comment comment) {
-        return processCommentEntity(comment)
-                .publishOn(Schedulers.boundedElastic())
-                .flatMap(commentRepository::save)
-                .map(Comment::from)
-                .onErrorMap(e -> handleCommentError("Failed to create", comment.getCommentId(), e));
-    }
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    public Comment create(Comment comment) {
+        try {
+            CommentEntity commentEntity = comment.toEntity();
 
-    @Override
-    public Mono<Comment> update(Comment comment) {
-        return Mono.just(comment.toEntity())
-                .flatMap(commentRepository::save)
-                .map(Comment::from)
-                .publishOn(Schedulers.boundedElastic())
-                .onErrorMap(e -> handleCommentError("Failed to update", comment.getCommentId(), e));
-    }
+            if (comment.getFeedId() != null) {
+                String feedId = comment.getFeedId();
+                FeedEntity feedEntity = feedRepository.findById(feedId).orElseThrow();
+                commentEntity.setFeed(feedEntity);
+            } else if (comment.getParentCommentId() != null) {
+                String parentCommentId = comment.getParentCommentId();
+                CommentEntity parentCommentEntity = commentRepository.findById(parentCommentId);
+                commentEntity.setParentComment(parentCommentEntity);
+            }
 
-    @Override
-    public Mono<Comment> delete(String commentId) {
-        return Mono.defer(() -> commentRepository.delete(commentId)
-                        .thenReturn(Comment.builder().commentId(commentId).build()))
-                .onErrorMap(e -> new ResourceNotFoundException("Failed to delete comment with commentId: " + commentId));
-    }
-
-    @Override
-    public Mono<Comment> getById(String commentId) {
-        return commentRepository.findById(commentId)
-                .map(Comment::from)
-                .switchIfEmpty(Mono.error(new ResourceNotFoundException("Comment not found with commentId: " + commentId)))
-                .onErrorMap(e -> new ResourceNotFoundException("Failed to fetch comment with commentId: " + commentId));
-    }
-
-    private Throwable handleCommentError(String action, String commentId, Throwable e) {
-        log.error("{} comment: {}", action, e.getMessage());
-        return new ResourceNotFoundException(String.format("%s comment with commentId: %s", action, commentId));
-    }
-
-    private Mono<CommentEntity> processCommentEntity(Comment comment) {
-        CommentEntity commentEntity = comment.toEntity();
-
-        if (comment.getParentCommentId() != null) {
-            return commentRepository.findById(comment.getParentCommentId())
-                    .map(parentComment -> {
-                        commentEntity.setParentComment(parentComment);
-                        return commentEntity;
-                    });
+            return Comment.from(commentRepository.save(commentEntity));
+        } catch (Exception e) {
+            log.error("Failed to create comment: " + e.getMessage());
+            throw new ResourceNotFoundException("Failed to create comment with commentId: " + comment.getCommentId());
         }
+    }
 
-        feedRepository.findById(comment.getFeedId()).ifPresent(commentEntity::setFeed);
-        return Mono.just(commentEntity);
+    @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    public Comment update(Comment comment) {
+        try {
+            CommentEntity commentEntity = comment.toEntity();
+            return Comment.from(commentRepository.save(commentEntity));
+        } catch (Exception e) {
+            log.error("Failed to update comment: " + e.getMessage());
+            throw new ResourceNotFoundException("Failed to update comment with commentId: " + comment.getCommentId());
+        }
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    public Comment delete(String commentId) {
+        try {
+            commentRepository.delete(commentId);
+            return Comment.builder().commentId(commentId).build();
+        } catch (Exception e) {
+            log.error("Failed to delete comment: " + e.getMessage());
+            throw new ResourceNotFoundException("Failed to delete comment with commentId: " + commentId);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Comment getById(String commentId) {
+        try {
+            CommentEntity commentEntity = commentRepository.findById(commentId);
+            return Comment.from(commentEntity);
+        } catch (Exception e) {
+            log.error("Failed to fetch comment: " + e.getMessage());
+            throw new ResourceNotFoundException("Failed to fetch comment with commentId: " + commentId);
+        }
     }
 }
